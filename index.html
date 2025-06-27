@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Diary - Unique Science Academy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hot-pink: #FF69B4;
+            --powder-blue: #B0E0E6;
+            --royal-green: #006A4E;
+            --light-bg: #f0f7f8;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--powder-blue), #ffffff);
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--royal-green);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        header img {
+            max-width: 120px;
+            border-radius: 50%;
+            border: 4px solid var(--royal-green);
+            padding: 5px;
+            background-color: white;
+            transition: transform 0.3s ease;
+        }
+        header img:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        header h1 {
+            color: var(--royal-green);
+            font-size: 2.5em;
+            margin: 10px 0 5px 0;
+            font-weight: 700;
+        }
+
+        header p {
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        h2 {
+            color: var(--royal-green);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 1.2em;
+            color: var(--royal-green);
+        }
+
+        #class-select {
+            width: 50%;
+            padding: 12px 20px;
+            border: 2px solid var(--royal-green);
+            border-radius: 25px;
+            font-size: 1em;
+            background-color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23006A4E' class='bi bi-chevron-down' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+        }
+        #class-select:hover, #class-select:focus {
+            border-color: var(--hot-pink);
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+        }
+        
+        #diary-display {
+            margin-top: 20px;
+        }
+
+        .diary-entry {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-left: 8px solid var(--hot-pink);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            animation: slideInUp 0.5s ease-out;
+            transform-origin: bottom center;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .diary-entry h3 {
+            margin: 0 0 10px 0;
+            color: var(--royal-green);
+            font-size: 1.5em;
+        }
+        .diary-entry h3 span {
+            font-size: 0.8em;
+            color: #777;
+            font-weight: normal;
+            float: right;
+        }
+        .diary-entry p {
+            white-space: pre-wrap;
+            margin-bottom: 0;
+            line-height: 1.6;
+            font-size: 1.1em;
+        }
+
+        #loading-message {
+            text-align: center;
+            font-size: 1.2em;
+            color: var(--royal-green);
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Unique Science Academy Logo">
+            <h1>Unique Science Academy</h1>
+            <p>Student Digital Diary</p>
+        </header>
+
+        <main>
+            <div class="form-group">
+                <label for="class-select">Apni Class Select Karein</label>
+                <select id="class-select">
+                    <option value="Class 1">Class 1</option>
+                    <option value="Class 2">Class 2</option>
+                    <option value="Class 3">Class 3</option>
+                    <option value="Class 4">Class 4</option>
+                    <option value="Class 5">Class 5</option>
+                    <option value="Class 6">Class 6</option>
+                    <option value="Class 7">Class 7</option>
+                    <option value="Class 8">Class 8</option>
+                    <option value="Class 9">Class 9</option>
+                    <option value="Class 10">Class 10</option>
+                </select>
+            </div>
+            <div id="diary-display">
+                <p id="loading-message">Class select karein...</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBe9IpJ3stUFua4_Xv8pN3NrwWRteIteo0",
+            authDomain: "unique-science-acadmy.firebaseapp.com",
+            databaseURL: "https://unique-science-acadmy-default-rtdb.firebaseio.com",
+            projectId: "unique-science-acadmy",
+            storageBucket: "unique-science-acadmy.firebasestorage.app",
+            messagingSenderId: "538744378449",
+            appId: "1:538744378449:web:7c2e0389b7fbccb7c49470",
+            measurementId: "G-V62QB3M91Q"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const classSelect = document.getElementById('class-select');
+        const diaryDisplay = document.getElementById('diary-display');
+
+        classSelect.addEventListener('change', fetchDiaries);
+
+        function fetchDiaries() {
+            const selectedClass = classSelect.value;
+            const diariesRef = database.ref('diaries').orderByChild('class').equalTo(selectedClass);
+
+            diaryDisplay.innerHTML = `<p id="loading-message">Loading diaries for ${selectedClass}...</p>`;
+
+            diariesRef.on('value', (snapshot) => {
+                diaryDisplay.innerHTML = ''; 
+                const data = snapshot.val();
+
+                if (data) {
+                    const entries = Object.values(data).sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    entries.forEach(entry => {
+                        const entryDiv = document.createElement('div');
+                        entryDiv.className = 'diary-entry';
+
+                        entryDiv.innerHTML = `
+                            <h3>${entry.subject} <span>(Date: ${entry.date})</span></h3>
+                            <p>${entry.homework}</p>
+                        `;
+                        diaryDisplay.appendChild(entryDiv);
+                    });
+                } else {
+                    diaryDisplay.innerHTML = `<p id="loading-message">No diary found for ${selectedClass}.</p>`;
+                }
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', fetchDiaries);
+    </script>
+</body>
+</html>
